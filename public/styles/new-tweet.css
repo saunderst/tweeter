@@ -24,6 +24,6 @@
   font-style: italic;
 }
 
-.new-tweet .counter .neg {
+.new-tweet .counter.neg {
   color: red;
 }

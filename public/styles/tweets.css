@@ -1,0 +1,66 @@
+.tweet {
+  margin-top: 1em;
+  border-radius: .3em;
+  border-style: groove;
+  border-width: thin;
+  border-color: lightgray;
+  box-shadow: 2px 2px 5px 0px rgba(143,143,143,0.38);
+  opacity: .7;
+}
+
+.tweet:hover {
+  opacity: 1;
+}
+
+
+.tweet header {
+  background-color: lavender;
+  vertical-align: top;
+}
+
+.tweet header .face {
+  margin-left: .5em;
+  border-radius: .5em;
+  width: 2em;
+  height: 2em;
+  margin-left: 
+}
+
+.tweet header .name {
+  margin-left: .5em;
+  font-size: 150%;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.tweet header .handle {
+  float: right;
+  margin-top: .5em;
+  margin-right: .5em;
+}
+
+.tweet p {
+  margin-left: .5em;
+  height: 2em;
+  font-size: 120%;
+}
+
+.tweet footer {
+  border-top-style: solid;
+  border-top-width: thin;
+  border-top-color: lightgray;
+  font-size: 75%;
+  padding: 2%;
+}
+
+.tweet .svg-inline--fa {
+  margin-left: 1%;
+  float: right;
+  color: darkturquoise;
+  visibility: hidden;
+}
+
+.tweet:hover .svg-inline--fa{
+  visibility: visible;
+}
+
