@@ -52,6 +52,8 @@ $(document).ready(function () {
     event.preventDefault();
     if ($(".new-tweet textarea").val().length > 140) {
       alert('Gotta shorten up that tweet.');
+    } else if ($(".new-tweet textarea").val().length === 0) {
+      alert('Can\'t post an empty tweet.');
     } else {
       $.post("/tweets", $(this).serialize(), () => {
         $.get("/tweets", data => {
