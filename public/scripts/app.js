@@ -50,9 +50,12 @@ $(document).ready(function () {
   loadTweets();
   $(".new-tweet form").on("submit", function (event) {
     event.preventDefault();
-    if ($(".new-tweet textarea").val().length > 140) {
+    $tweetText = $(".new-tweet textarea").val();
+    if (/[\<\>\/]/.test($tweetText)) {
+      alert('Tweet contains invalid characters.')
+    } else if ($tweetText.length > 140) {
       alert('Gotta shorten up that tweet.');
-    } else if ($(".new-tweet textarea").val().length === 0) {
+    } else if ($tweetText.length === 0) {
       alert('Can\'t post an empty tweet.');
     } else {
       $.post("/tweets", $(this).serialize(), () => {
