@@ -40,16 +40,14 @@ function renderTweets(tweets) {
   tweets.forEach((tweet) => $('#tweets').prepend(createTweetElement(tweet)));
 }
 
-function showTweets() {
+function loadTweets() {
   $.get("/tweets", data => {
     renderTweets(data);
   });
 }
 
 $(document).ready(function () {
-  $.get("/tweets", data => {
-    renderTweets(data);
-  });
+  loadTweets();
   $(".new-tweet form").on("submit", function (event) {
     event.preventDefault();
     if ($(".new-tweet textarea").val().length > 140) {
