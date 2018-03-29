@@ -23,6 +23,7 @@
   font-size: 200%;
 }
 
+/* in default state when new tweet section is visible */
 .composeButton {
   font-size: 1.3em; 
   line-height: 1.3em; 
@@ -37,6 +38,7 @@
   color: #00a087;
 }
 
+/* in this state when new tweet section is hidden */
 .composeButton.active{
   background-color: white;
   color: black;

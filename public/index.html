@@ -23,12 +23,12 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
 
+  <!-- icons for like buttons, etc. -->
   <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
     crossorigin="anonymous"></script>
 </head>
 
 <body>
-
   <!-- Top nav bar (fixed) -->
   <nav id="nav-bar">
     <img class="logo" src="/images/bird.png">
@@ -38,6 +38,7 @@
 
   <!-- Page-specific (main) content here -->
   <main class="container">
+    <!-- Here's where the user inputs new tweets. -->
     <section class="new-tweet">
       <h2>Compose Tweet</h2>
       <form action="/tweets" method="POST">
@@ -47,24 +48,7 @@
       </form>
     </section>
     <section id="tweets">
-<!-- don't need bogus tweet anymore
-      <article class="tweet">
-        <header>
-          <img class="face" src="images/stickman.gif">
-          <label class="name">Bill Fields</label>
-          <label class="handle">@MrFields</label>
-        </header>
-        <p>
-          Little bogus tweet here, just to get this party started.
-        </p>
-        <footer>
-          <label class="ago">10 days ago</label>
-          <i class="fas fa-heart"></i>
-          <i class="fas fa-retweet"></i>
-          <i class="fas fa-flag"></i>
-        </footer>
-      </article>
--->
+      <!-- Initially empty, this gets populated from the database on startup. -->
     </section>
   </main>
 </body>
