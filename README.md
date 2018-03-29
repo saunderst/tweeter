@@ -22,3 +22,7 @@ This version does not have true multiuser capability.  Multiple users are simula
 - md5 2.1.0
 - MongoDB 2.2.35
 
+## Screenshots
+
+!["Screenshot of tweets with tweet compose box hidden"](https://github.com/saunderst/tweeter/blob/master/docs/tweeter-with-compose-hidden.png)
+!["Screenshot of tweets with tweet compose box visible"](https://github.com/saunderst/tweeter/blob/master/docs/tweeter-with-compose-visible.png)
