@@ -62,7 +62,19 @@ $(document).ready(function () {
         $.get("/tweets", data => {
           $('#tweets').prepend(createTweetElement(data[data.length - 1]));
         });
+        $(".new-tweet textarea").val('');
       });
     }
   });
+
+  $('.composeButton').on('click', function(event) {
+    if ($(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $('.new-tweet').slideDown();
+      $('.new-tweet textarea').focus();
+    } else {
+      $(this).addClass('active');
+      $('.new-tweet').slideUp();
+    }
+  })
 });
