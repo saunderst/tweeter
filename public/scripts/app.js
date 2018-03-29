@@ -6,30 +6,30 @@ function createTweetElement(tweet) {
   let $tweet = $('<article>').addClass('tweet');
   let timeAgo = ($.now() - tweet.created_at) / 1000 / 60 // minutes ago
   if (timeAgo < 1) {
-    timePhrase = "Now";
+    timePhrase = 'Now';
   } else if (timeAgo < 60) {
-    timePhrase = Math.floor(timeAgo) + " minutes ago"
+    timePhrase = Math.floor(timeAgo) + ' minutes ago'
   } else {
     timeAgo /= 60;  // hours ago
     if (timeAgo < 24) {
-      timePhrase = Math.floor(timeAgo) + " hours ago"
+      timePhrase = Math.floor(timeAgo) + ' hours ago'
     } else {
       timeAgo /= 24;  // days ago: the maximum time units (for now)
-      timePhrase = Math.floor(timeAgo) + " days ago"
+      timePhrase = Math.floor(timeAgo) + ' days ago'
     }
   }
   $tweet.append(`
     <header>
-      <img class="face" src="${tweet.user.avatars.small}">
-      <label class="name">${tweet.user.name}</label>
-      <label class="handle">${tweet.user.handle}</label>
+      <img class='face' src='${tweet.user.avatars.small}'>
+      <label class='name'>${tweet.user.name}</label>
+      <label class='handle'>${tweet.user.handle}</label>
     </header>
     <p>${tweet.content.text}</p>
     <footer>
-      <label class="ago">${timePhrase}</label>
-      <i class="fas fa-heart"></i>
-      <i class="fas fa-retweet"></i>
-      <i class="fas fa-flag"></i>
+      <label class='ago'>${timePhrase}</label>
+      <i class='fas fa-heart'></i>
+      <i class='fas fa-retweet'></i>
+      <i class='fas fa-flag'></i>
     </footer>
 `);
   return $tweet;
@@ -37,7 +37,7 @@ function createTweetElement(tweet) {
 
 // Get all the existing tweets from the database and use them to build the bulk of the main page.
 function loadTweets() {
-  $.get("/tweets", data => {
+  $.get('/tweets', tweets => {
     // The database returns the tweets in order of creation, so prepend to show newest first.
     tweets.forEach((tweet) => $('#tweets').prepend(createTweetElement(tweet)));
   });
@@ -52,9 +52,9 @@ $(document).ready(function () {
     - post the new tweet
     - get the tweets and update display to include the new one
   */
-  $(".new-tweet form").on("submit", function (event) {
+  $('.new-tweet form').on('submit', function (event) {
     event.preventDefault();
-    $tweetText = $(".new-tweet textarea").val();
+    $tweetText = $('.new-tweet textarea').val();
     if (/[\<\>\/]/.test($tweetText)) {  // look out for HTML tags to avoid scripting
       alert('Tweet contains invalid characters.')
     } else if ($tweetText.length > 140) {
@@ -68,11 +68,11 @@ $(document).ready(function () {
         in order to get the tweet we just added.
         Or simpler to just get all (or the last N) tweets in this case?
       */
-      $.post("/tweets", $(this).serialize(), () => {
-        $.get("/tweets", data => {
+      $.post('/tweets', $(this).serialize(), () => {
+        $.get('/tweets', data => {
           $('#tweets').prepend(createTweetElement(data[data.length - 1]));
         });
-        $(".new-tweet textarea").val(''); // clear the input box
+        $('.new-tweet textarea').val(''); // clear the input box
       });
     }
   });
