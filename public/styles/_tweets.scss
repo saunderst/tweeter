@@ -1,0 +1,70 @@
+.tweet {
+  margin-top: 1em;
+  border-radius: .3em;
+  border-style: groove;
+  border-width: $border-width;
+  border-color: $tweet-border-color;
+  box-shadow: 2px 2px 5px 0px rgba(143,143,143,0.38);
+  opacity: .7;  /* a little faded by default to let the hovered tweet pop (see below) */
+
+  header {
+    background-color: lavender;
+    vertical-align: top;
+    .face {
+      margin-left: .5em;
+      border-radius: $corner-rounding;
+      width: 2em;
+      height: 2em;
+    }
+    .name {
+      margin-left: .5em;
+      font-size: 150%;
+      font-weight: bold;
+      vertical-align: top;
+    }
+    .handle {
+      float: right;
+      margin-top: .5em;
+      margin-right: .5em;
+    }
+  }
+  
+  p {
+    margin-left: .5em;
+    height: 3em;
+  }
+  
+  footer {
+    border-top-style: $border-style;
+    border-top-width: $border-width;
+    border-top-color: $tweet-border-color;
+    font-size: 75%;
+    padding: 2%;
+    display: flex;
+
+    .ago {
+      order: 0;
+      flex: 1;
+    }
+
+    .likes {
+      order: 1;
+      flex: 1;
+    }
+  
+    .svg-inline--fa {
+      order: 2;
+      flex: 0;
+      margin-left: 1%;
+      color: darkturquoise;
+      visibility: hidden;
+    }
+  }
+
+  &:hover {
+    opacity: 1;
+    .svg-inline--fa {
+      visibility: visible;
+    }
+  }
+}

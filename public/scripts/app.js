@@ -1,9 +1,26 @@
+var fakeUserID = "";
+var tweetLikesElement;
+
+function buildTweetLikesElement(tweetId, callback) {
+  let tweetLikesElement = '';
+  $.get('/tweets/likes/' + tweetId, ((likesInfo) => {
+    if (likesInfo.length > 0) {
+      tweetLikesElement = '<label class="likes">'
+        + likesInfo[0].likes
+        + ' like'
+        + (likesInfo[0].likes > 1 ? 's' : '')
+        + '</label>';
+    }
+    callback(tweetLikesElement);
+  }));
+}
+
 /*
   Create the display elements to represent a single specified tweet,
   and return a bunch of HTML accordingly.
 */
 function createTweetElement(tweet) {
-  let $tweet = $('<article>').addClass('tweet');
+  let $tweet = $(`<article data-tweetid=${tweet._id}>`).addClass('tweet');
   let timeAgo = ($.now() - tweet.created_at) / 1000 / 60 // minutes ago
   if (timeAgo < 1) {
     timePhrase = 'Now';
@@ -18,20 +35,25 @@ function createTweetElement(tweet) {
       timePhrase = Math.floor(timeAgo) + ' days ago'
     }
   }
-  $tweet.append(`
-    <header>
-      <img class='face' src='${tweet.user.avatars.small}'>
+
+  let tweetLikesElement = '';
+  buildTweetLikesElement(tweet._id, (tweetLikesElement) => {
+    $tweet.append(`
+      <header>
+      <img class='face' src='${tweet.user.avatars.large}'>
       <label class='name'>${tweet.user.name}</label>
       <label class='handle'>${tweet.user.handle}</label>
-    </header>
-    <p>${tweet.content.text}</p>
-    <footer>
+      </header>
+      <p>${tweet.content.text}</p>
+      <footer>
       <label class='ago'>${timePhrase}</label>
-      <i class='fas fa-heart'></i>
-      <i class='fas fa-retweet'></i>
+      ${tweetLikesElement}
       <i class='fas fa-flag'></i>
-    </footer>
-`);
+      <i class='fas fa-retweet'></i>
+      <i class='fas fa-heart'></i>
+      </footer>
+      `);
+  });
   return $tweet;
 }
 
@@ -78,7 +100,7 @@ $(document).ready(function () {
   });
 
   // implement a button that hides/shows the new tweet editor
-  $('.composeButton').on('click', function(event) {
+  $('.composeButton').on('click', function (event) {
     if ($(this).hasClass('active')) {
       $(this).removeClass('active');
       $('.new-tweet').slideDown();
@@ -87,5 +109,34 @@ $(document).ready(function () {
       $(this).addClass('active');
       $('.new-tweet').slideUp();
     }
-  })
+  });
+
+  $('#tweets').on('click', '.face', function (event) {
+    fakeUserID = $(this).closest('.tweet').find('.handle').text();
+    $('#whoisit').text(fakeUserID);
+  });
+
+  $('#tweets').on('click', '.fa-heart', function (event) {
+    if (!fakeUserID) {
+      alert('You must be logged in to like tweets.');
+    } else {
+      let $thisTweet = $(this).closest('.tweet')
+      if ($thisTweet.find('.handle').text() === fakeUserID) {
+        alert('You can\'t like your own tweets.\n\nWell, you probably do like them, but you can\'t "like" them.');
+      } else {
+        let tweetId = $thisTweet.data('tweetid');
+        $.post('/tweets/like', { user: fakeUserID, tweet: tweetId }, () => {
+          buildTweetLikesElement(tweetId, (tweetLikesElement) => {
+            let oldLikesElement = $(this).closest('footer').find('.likes');
+            if (oldLikesElement.length > 0) {
+              oldLikesElement.before(tweetLikesElement);
+              oldLikesElement.remove();
+            } else {
+              $(this).closest('footer').append(tweetLikesElement);
+            }
+          });
+        });
+      }
+    }
+  });
 });

@@ -23,6 +23,7 @@ module.exports = function(DataHelpers) {
       return;
     }
 
+
     const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
     const tweet = {
       user: user,
@@ -41,6 +42,32 @@ module.exports = function(DataHelpers) {
     });
   });
 
-  return tweetsRoutes;
+  // process "like" request
+  tweetsRoutes.post("/like/", function(req, res) {
+    if (!req.body.user || !req.body.tweet) {
+      res.status(400).json({ error: 'invalid request: missing user ID or tweet ID'});
+      return;
+    }
 
+    DataHelpers.likeTweet(req.body.user, req.body.tweet, (err) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.status(201).send();
+      }
+    });
+  });
+  
+  // get "like" history for a given tweet
+  tweetsRoutes.get("/likes/:tweetID", function(req, res) {
+    DataHelpers.getLikes(req.params.tweetID,(err,likes) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json(likes);
+      }
+    });
+  });
+  
+  return tweetsRoutes;
 }

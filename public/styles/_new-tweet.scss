@@ -1,0 +1,28 @@
+.new-tweet {
+  background-color: #f0f0f0;
+  padding: 1em;
+  border-radius: $corner-rounding;
+  border-style: $border-style;
+  border-width: $border-width;
+  border-color: $tweet-border-color;
+
+  textarea {
+    padding: 2%;
+    width: -webkit-fill-available;
+    margin-top: 1em;
+  } 
+  
+  h2 {
+    border-bottom-style: $border-style;
+    border-bottom-width: $border-width;
+    margin: 0rem;
+  } 
+  
+  .counter {
+    float: right;
+    font-style: italic;
+    &.neg {
+      color: red;
+    }
+  }
+}

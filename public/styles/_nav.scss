@@ -1,0 +1,44 @@
+#nav-bar {
+  position: fixed;
+  top: 0;
+  height: $nav-bar-size;
+  width: 100%;
+  background-color: $header-background;
+  color: $header-foreground;
+  padding-left: 2em;
+  padding-right: 2em;
+  display: flex;
+  align-items: center;
+  .header {
+    float: left;
+    margin-left: $nav-bar-size / 10;
+    font-size: 200%;
+  }
+  .logo {
+    width: $nav-bar-size;
+    height: $nav-bar-size;
+    float: left;
+  }
+}
+
+
+.composeButton {
+  font-size: 1.3em; 
+  line-height: 1.3em; 
+  padding: .9em; 
+  border-radius: $corner-rounding;
+  border-style: $border-style; 
+  border-width: $border-width; 
+  position: absolute;
+  right: $nav-bar-size / 10;
+  cursor: pointer;
+
+  /* in default state when new tweet section is visible */
+  background-color: $header-foreground;
+  color: $header-background;
+  &.active{
+    /* in this state when new tweet section is hidden */
+    background-color: white;
+    color: black;
+  }
+}
