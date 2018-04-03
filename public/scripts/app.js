@@ -1,5 +1,4 @@
 var fakeUserID = "";
-var tweetLikesElement;
 
 function buildTweetLikesElement(tweetId, callback) {
   let tweetLikesElement = '';
@@ -22,6 +21,7 @@ function buildTweetLikesElement(tweetId, callback) {
 function createTweetElement(tweet) {
   let $tweet = $(`<article data-tweetid=${tweet._id}>`).addClass('tweet');
   let timeAgo = ($.now() - tweet.created_at) / 1000 / 60 // minutes ago
+  let timePhrase = '';
   if (timeAgo < 1) {
     timePhrase = 'Now';
   } else if (timeAgo < 60) {

@@ -8,6 +8,13 @@
   opacity: .7;  /* a little faded by default to let the hovered tweet pop (see below) */
 
   header {
+    @media (max-width: 450px) {
+      font-size: 50%;
+    }
+    @media (max-width: 250px) {
+      font-size: 25%;
+    }
+
     background-color: lavender;
     vertical-align: top;
     .face {
@@ -30,7 +37,11 @@
   }
   
   p {
+    @media (max-width: 450px) {
+      font-size: 75%;
+    }
     margin-left: .5em;
+    margin-right: .5em;
     height: 3em;
   }
   
@@ -39,6 +50,9 @@
     border-top-width: $border-width;
     border-top-color: $tweet-border-color;
     font-size: 75%;
+    @media (max-width: 250px) {
+      font-size: 25%;
+    }
     padding: 2%;
     display: flex;
 
